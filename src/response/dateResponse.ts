@@ -1,8 +1,8 @@
-import { currentDateFormats } from "../core/date";
+import { formatCurrentDate } from "../core/date";
 import { ClockeyDateResponse } from "../types/date";
 
 export function getCurrentDate() {
-  const { date } = currentDateFormats();
+  const { date } = formatCurrentDate();
   const response: ClockeyDateResponse = {
     success: true,
     code: 200,

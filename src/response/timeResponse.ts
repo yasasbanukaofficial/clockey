@@ -1,8 +1,8 @@
-import { currentTimeFormats } from "../core/time";
+import { formatCurrentTime } from "../core/time";
 import { ClockeyTimeResponse } from "../types/time";
 
 export function getCurrentTime() {
-  const { time } = currentTimeFormats();
+  const { time } = formatCurrentTime();
   const response: ClockeyTimeResponse = {
     success: true,
     code: 200,

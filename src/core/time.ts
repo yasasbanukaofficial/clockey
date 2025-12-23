@@ -1,4 +1,4 @@
-export function currentTimeFormats() {
+export function formatCurrentTime() {
   const currentTime = new Date();
 
   let hrs24 = currentTime.getHours();

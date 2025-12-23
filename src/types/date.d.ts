@@ -3,6 +3,7 @@ export interface DateData {
   month: string;
   day: string;
   date: number;
+  ordinal: string;
   fullDate: string;
 }
 
