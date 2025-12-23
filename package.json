@@ -1,0 +1,39 @@
+{
+  "name": "clockey",
+  "version": "1.0.0",
+  "description": "API-first time utilities for backend developers",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yasasbanukaofficial/clockey.git"
+  },
+  "keywords": [
+    "clockey",
+    "api",
+    "time",
+    "timestamp",
+    "backend",
+    "server",
+    "clock",
+    "utc",
+    "helper",
+    "response",
+    "clock",
+    "date"
+  ],
+  "author": "Yasas Banu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yasasbanukaofficial/clockey/issues"
+  },
+  "homepage": "https://github.com/yasasbanukaofficial/clockey#readme",
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  }
+}
