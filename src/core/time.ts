@@ -1,22 +1,28 @@
 export function currentTimeFormats() {
   const currentTime = new Date();
 
-  const hrs = currentTime.getHours();
-  const utcHr = currentTime.getUTCHours();
-
+  let hrs24 = currentTime.getHours();
   const min = currentTime.getMinutes();
-  const utcMin = currentTime.getUTCMinutes();
-
   const sec = currentTime.getSeconds();
-  const utcSec = currentTime.getUTCSeconds();
 
-  const period = hrs >= 12 ? "PM" : "AM";
+  const period = hrs24 >= 12 ? "PM" : "AM";
+  let hrs12 = hrs24 % 12;
+  if (hrs12 === 0) hrs12 = 12;
 
-  const timeAsString = `${hrs}:${min}:${sec} ${period}`;
-  const utctimeAsString = `${utcHr}:${utcMin}:${utcSec}`;
+  const pad = (n: number) => n.toString().padStart(2, "0");
+
+  const timeAsString24 = `${pad(hrs24)}:${pad(min)}:${pad(sec)}`;
+  const timeAsString12 = `${pad(hrs12)}:${pad(min)}:${pad(sec)} ${period}`;
 
   return {
-    time: { timeAsString, hrs, min, sec, period },
-    utcTime: { utctimeAsString, utcHr, utcMin, utcSec },
+    time: {
+      hrs24,
+      hrs12,
+      min,
+      sec,
+      period,
+      timeAsString24,
+      timeAsString12,
+    },
   };
 }

@@ -1,26 +1,16 @@
 export interface TimeData {
-  timeAsString: string;
-  hrs: number;
+  hrs24: number;
+  hrs12: number;
   min: number;
   sec: number;
   period: "AM" | "PM" | string;
-}
-
-export interface UTCTimeData {
-  utctimeAsString: string;
-  utcHr: number;
-  utcMin: number;
-  utcSec: number;
-}
-
-export interface Time {
-  time: TimeData;
-  utcTime: UTCTimeData;
+  timeAsString24: string;
+  timeAsString12: string;
 }
 
 export interface ClockeyTimeResponse {
   success: boolean;
   code: number;
   msg: string;
-  data: Time;
+  data: TimeData;
 }
