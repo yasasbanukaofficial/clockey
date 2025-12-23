@@ -1,28 +1,80 @@
+const pad = (n: number) => n.toString().padStart(2, "0");
+
 export function formatCurrentTime() {
-  const currentTime = new Date();
+  const now = new Date();
 
-  let hrs24 = currentTime.getHours();
-  const min = currentTime.getMinutes();
-  const sec = currentTime.getSeconds();
+  const hr24 = now.getHours();
+  const min = now.getMinutes();
+  const sec = now.getSeconds();
 
-  const period = hrs24 >= 12 ? "PM" : "AM";
-  let hrs12 = hrs24 % 12;
-  if (hrs12 === 0) hrs12 = 12;
-
-  const pad = (n: number) => n.toString().padStart(2, "0");
-
-  const timeAsString24 = `${pad(hrs24)}:${pad(min)}:${pad(sec)}`;
-  const timeAsString12 = `${pad(hrs12)}:${pad(min)}:${pad(sec)} ${period}`;
+  const period = hr24 >= 12 ? "PM" : "AM";
+  const hr12 = hr24 % 12 || 12;
 
   return {
-    time: {
-      hrs24,
-      hrs12,
-      min,
-      sec,
-      period,
-      timeAsString24,
-      timeAsString12,
-    },
+    hr24,
+    hr12,
+    min,
+    sec,
+    period,
+    hr24Str: pad(hr24),
+    hr12Str: pad(hr12),
+    minStr: pad(min),
+    secStr: pad(sec),
+    timeAsString24: `${pad(hr24)}:${pad(min)}:${pad(sec)}`,
+    timeAsString12: `${pad(hr12)}:${pad(min)}:${pad(sec)} ${period}`,
   };
+}
+
+export function currentHour() {
+  const currentTime = new Date();
+  const hr24 = currentTime.getHours();
+  const hr12 = hr24 % 12 || 12;
+
+  return {
+    hour24: hr24,
+    hour12: hr12,
+    hour24Str: pad(hr24),
+    hour12Str: pad(hr12),
+  };
+}
+
+export function currentMinute() {
+  const currentTime = new Date();
+  const minute = currentTime.getMinutes();
+  return {
+    minute,
+    minuteStr: pad(minute),
+  };
+}
+
+export function currentSecond() {
+  const currentTime = new Date();
+  const second = currentTime.getSeconds();
+  return {
+    second,
+    secondStr: pad(second),
+  };
+}
+
+// String Based Responses
+export function currentHour24Str() {
+  return currentHour().hour24Str;
+}
+
+export function currentHour12Str() {
+  return currentHour().hour12Str;
+}
+
+export function currentMinuteStr() {
+  return currentMinute().minuteStr;
+}
+
+export function currentSecondStr() {
+  return currentSecond().secondStr;
+}
+
+export function currentPeriod() {
+  const hr24 = new Date().getHours();
+  const period = hr24 >= 12 ? "PM" : "AM";
+  return { period };
 }

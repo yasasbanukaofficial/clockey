@@ -1,6 +1,6 @@
 export interface TimeData {
-  hrs24: number;
-  hrs12: number;
+  hr24: number;
+  hr12: number;
   min: number;
   sec: number;
   period: "AM" | "PM" | string;
