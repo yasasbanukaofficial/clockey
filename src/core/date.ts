@@ -89,3 +89,70 @@ export function currentFullDate() {
   const fullDate = `${month} ${date}${ordinal}, ${day}, ${yr}`;
   return { fullDate };
 }
+
+export function formatCurrentDateUTC() {
+  const now = new Date();
+
+  const yr = now.getUTCFullYear();
+  const month = MONTH_NAMES[now.getUTCMonth()];
+  const day = DAY_NAMES[now.getUTCDay()];
+  const date = now.getUTCDate();
+  const ordinal =
+    date === 1 ? "st" : date === 2 ? "nd" : date === 3 ? "rd" : "th";
+
+  const fullDate = `${month} ${date}${ordinal}, ${day}, ${yr}`;
+
+  return {
+    date: { yr, month, day, date, ordinal, fullDate },
+  };
+}
+
+export function currentYearUTC() {
+  return new Date().getUTCFullYear();
+}
+
+export function currentMonthUTC() {
+  const now = new Date();
+  const idx = now.getUTCMonth();
+  const monthNumber = idx + 1;
+  return {
+    monthNumber,
+    monthName: MONTH_NAMES[idx],
+    monthStr: monthNumber.toString().padStart(2, "0"),
+  };
+}
+
+export function currentDayUTC() {
+  const now = new Date();
+  const idx = now.getUTCDay();
+  return {
+    dayIndex: idx,
+    dayName: DAY_NAMES[idx],
+  };
+}
+
+export function currentDateNumberUTC() {
+  const d = new Date().getUTCDate();
+  return {
+    date: d,
+    dateStr: d.toString().padStart(2, "0"),
+  };
+}
+
+export function currentOrdinalUTC() {
+  const d = new Date().getUTCDate();
+  const ordinal = d === 1 ? "st" : d === 2 ? "nd" : d === 3 ? "rd" : "th";
+  return { ordinal };
+}
+
+export function currentFullDateUTC() {
+  const now = new Date();
+  const yr = now.getUTCFullYear();
+  const month = MONTH_NAMES[now.getUTCMonth()];
+  const day = DAY_NAMES[now.getUTCDay()];
+  const date = now.getUTCDate();
+  const ordinal =
+    date === 1 ? "st" : date === 2 ? "nd" : date === 3 ? "rd" : "th";
+  const fullDate = `${month} ${date}${ordinal}, ${day}, ${yr}`;
+  return { fullDate };
+}

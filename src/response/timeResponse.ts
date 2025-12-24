@@ -8,6 +8,15 @@ import {
   currentMinuteStr,
   currentSecondStr,
   currentPeriod,
+  formatCurrentTimeUTC,
+  currentHourUTC,
+  currentMinuteUTC,
+  currentSecondUTC,
+  currentHour24StrUTC,
+  currentHour12StrUTC,
+  currentMinuteStrUTC,
+  currentSecondStrUTC,
+  currentPeriodUTC,
 } from "../core/time";
 import { ClockeyTimeResponse } from "../types/time";
 
@@ -138,6 +147,135 @@ export function getCurrentPeriodResponse() {
     success: true,
     code: 200,
     msg: "Current period fetched successfully",
+    period,
+  };
+}
+
+export function getCurrentTimeUTC() {
+  const { timeAsString24, timeAsString12 } = formatCurrentTimeUTC();
+  return { timeAsString12, timeAsString24 };
+}
+
+export function getCurrentTimeUTCResponse() {
+  const time = formatCurrentTimeUTC();
+  const response: ClockeyTimeResponse = {
+    success: true,
+    code: 200,
+    msg: "Current UTC time fetched successfully",
+    data: time,
+  };
+  return response;
+}
+
+export function getCurrentHrUTC() {
+  return currentHourUTC();
+}
+
+export function getCurrentHrUTCResponse() {
+  const hour = currentHourUTC();
+  const response = {
+    success: true,
+    code: 200,
+    msg: "Current UTC hour fetched successfully",
+    hour,
+  };
+  return response;
+}
+
+export function getCurrentMinuteUTC() {
+  return currentMinuteUTC();
+}
+
+export function getCurrentMinuteUTCResponse() {
+  const minute = currentMinuteUTC();
+  return {
+    success: true,
+    code: 200,
+    msg: "Current UTC minute fetched successfully",
+    minute,
+  };
+}
+
+export function getCurrentSecondUTC() {
+  return currentSecondUTC();
+}
+
+export function getCurrentSecondUTCResponse() {
+  const second = currentSecondUTC();
+  return {
+    success: true,
+    code: 200,
+    msg: "Current UTC second fetched successfully",
+    second,
+  };
+}
+
+export function getCurrentHour24StrUTC() {
+  return currentHour24StrUTC();
+}
+
+export function getCurrentHour24StrUTCResponse() {
+  const value = currentHour24StrUTC();
+  return {
+    success: true,
+    code: 200,
+    msg: "Current UTC hour24 string fetched",
+    value,
+  };
+}
+
+export function getCurrentHour12StrUTC() {
+  return currentHour12StrUTC();
+}
+
+export function getCurrentHour12StrUTCResponse() {
+  const value = currentHour12StrUTC();
+  return {
+    success: true,
+    code: 200,
+    msg: "Current UTC hour12 string fetched",
+    value,
+  };
+}
+
+export function getCurrentMinuteStrUTC() {
+  return currentMinuteStrUTC();
+}
+
+export function getCurrentMinuteStrUTCResponse() {
+  const value = currentMinuteStrUTC();
+  return {
+    success: true,
+    code: 200,
+    msg: "Current UTC minute string fetched",
+    value,
+  };
+}
+
+export function getCurrentSecondStrUTC() {
+  return currentSecondStrUTC();
+}
+
+export function getCurrentSecondStrUTCResponse() {
+  const value = currentSecondStrUTC();
+  return {
+    success: true,
+    code: 200,
+    msg: "Current UTC second string fetched",
+    value,
+  };
+}
+
+export function getCurrentPeriodUTC() {
+  return currentPeriodUTC();
+}
+
+export function getCurrentPeriodUTCResponse() {
+  const period = currentPeriodUTC();
+  return {
+    success: true,
+    code: 200,
+    msg: "Current UTC period fetched successfully",
     period,
   };
 }
