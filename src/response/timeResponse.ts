@@ -17,6 +17,9 @@ import {
   currentMinuteStrUTC,
   currentSecondStrUTC,
   currentPeriodUTC,
+  currentTimeISO,
+  currentTimeUnixSeconds,
+  currentTimeUnixMilliseconds,
 } from "../core/time";
 import { ClockeyTimeResponse } from "../types/time";
 
@@ -277,5 +280,47 @@ export function getCurrentPeriodUTCResponse() {
     code: 200,
     msg: "Current UTC period fetched successfully",
     period,
+  };
+}
+
+export function getcurrentTimeISO() {
+  return currentTimeISO();
+}
+
+export function getcurrentTimeISOResponse() {
+  const value = currentTimeISO();
+  return {
+    success: true,
+    code: 200,
+    msg: "Current time ISO 8601 fetched successfully",
+    value,
+  };
+}
+
+export function getCurrentTimeUnixSeconds() {
+  return currentTimeUnixSeconds();
+}
+
+export function getCurrentTimeUnixSecondsResponse() {
+  const value = currentTimeUnixSeconds();
+  return {
+    success: true,
+    code: 200,
+    msg: "Current time Unix seconds fetched successfully",
+    value,
+  };
+}
+
+export function getCurrentTimeUnixMilliseconds() {
+  return currentTimeUnixMilliseconds();
+}
+
+export function getCurrentTimeUnixMillisecondsResponse() {
+  const value = currentTimeUnixMilliseconds();
+  return {
+    success: true,
+    code: 200,
+    msg: "Current time Unix milliseconds fetched successfully",
+    value,
   };
 }

@@ -13,6 +13,9 @@ import {
   currentDateNumberUTC,
   currentOrdinalUTC,
   currentFullDateUTC,
+  currentDateISO,
+  currentDateUnixSeconds,
+  currentDateUnixMilliseconds,
 } from "../core/date";
 import { ClockeyDateResponse } from "../types/date";
 
@@ -202,6 +205,48 @@ export function getCurrentFullDateUTCResponse() {
     success: true,
     code: 200,
     msg: "Current UTC full date fetched successfully",
+    value,
+  };
+}
+
+export function getcurrentDateISO() {
+  return currentDateISO();
+}
+
+export function getcurrentDateISOResponse() {
+  const value = currentDateISO();
+  return {
+    success: true,
+    code: 200,
+    msg: "Current date ISO 8601 fetched successfully",
+    value,
+  };
+}
+
+export function getCurrentDateUnixSeconds() {
+  return currentDateUnixSeconds();
+}
+
+export function getCurrentDateUnixSecondsResponse() {
+  const value = currentDateUnixSeconds();
+  return {
+    success: true,
+    code: 200,
+    msg: "Current date Unix seconds fetched successfully",
+    value,
+  };
+}
+
+export function getCurrentDateUnixMilliseconds() {
+  return currentDateUnixMilliseconds();
+}
+
+export function getCurrentDateUnixMillisecondsResponse() {
+  const value = currentDateUnixMilliseconds();
+  return {
+    success: true,
+    code: 200,
+    msg: "Current date Unix milliseconds fetched successfully",
     value,
   };
 }

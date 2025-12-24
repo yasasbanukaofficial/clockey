@@ -154,3 +154,15 @@ export function currentPeriodUTC() {
   const period = hr24 >= 12 ? "PM" : "AM";
   return { period };
 }
+
+export function currentTimeISO() {
+  return new Date().toISOString();
+}
+
+export function currentTimeUnixSeconds() {
+  return Math.floor(new Date().getTime() / 1000);
+}
+
+export function currentTimeUnixMilliseconds() {
+  return new Date().getTime();
+}

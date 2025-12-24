@@ -156,3 +156,15 @@ export function currentFullDateUTC() {
   const fullDate = `${month} ${date}${ordinal}, ${day}, ${yr}`;
   return { fullDate };
 }
+
+export function currentDateISO() {
+  return new Date().toISOString();
+}
+
+export function currentDateUnixSeconds() {
+  return Math.floor(new Date().getTime() / 1000);
+}
+
+export function currentDateUnixMilliseconds() {
+  return new Date().getTime();
+}
