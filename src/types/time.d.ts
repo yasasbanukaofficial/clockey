@@ -4,6 +4,9 @@ export interface TimeData {
   min: number;
   sec: number;
   period: "AM" | "PM" | string;
+  timeIso: string;
+  unixSeconds: number;
+  unixMilliseconds: number;
   timeAsString24: string;
   timeAsString12: string;
 }

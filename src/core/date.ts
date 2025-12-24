@@ -36,7 +36,17 @@ export function formatCurrentDate() {
   const fullDate = `${month} ${date}${ordinal}, ${day}, ${yr}`;
 
   return {
-    date: { yr, month, day, date, ordinal, fullDate },
+    date: {
+      yr,
+      month,
+      day,
+      date,
+      ordinal,
+      fullDate,
+      dateIso: currentDate.toISOString(),
+      unixSeconds: Math.floor(currentDate.getTime() / 1000),
+      unixMilliseconds: currentDate.getTime(),
+    },
   };
 }
 
@@ -103,7 +113,17 @@ export function formatCurrentDateUTC() {
   const fullDate = `${month} ${date}${ordinal}, ${day}, ${yr}`;
 
   return {
-    date: { yr, month, day, date, ordinal, fullDate },
+    date: {
+      yr,
+      month,
+      day,
+      date,
+      ordinal,
+      fullDate,
+      dateIso: now.toISOString(),
+      unixSeconds: Math.floor(now.getTime() / 1000),
+      unixMilliseconds: now.getTime(),
+    },
   };
 }
 

@@ -5,6 +5,9 @@ export interface DateData {
   date: number;
   ordinal: string;
   fullDate: string;
+  dateIso: string;
+  unixSeconds: number;
+  unixMilliseconds: number;
 }
 
 export interface ClockeyDateResponse {

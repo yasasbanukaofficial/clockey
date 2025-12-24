@@ -20,6 +20,9 @@ export function formatCurrentTime() {
     hr12Str: pad(hr12),
     minStr: pad(min),
     secStr: pad(sec),
+    timeIso: now.toISOString(),
+    unixSeconds: Math.floor(now.getTime() / 1000),
+    unixMilliseconds: now.getTime(),
     timeAsString24: `${pad(hr24)}:${pad(min)}:${pad(sec)}`,
     timeAsString12: `${pad(hr12)}:${pad(min)}:${pad(sec)} ${period}`,
   };
@@ -99,6 +102,9 @@ export function formatCurrentTimeUTC() {
     hr12Str: pad(hr12),
     minStr: pad(min),
     secStr: pad(sec),
+    timeIso: now.toISOString(),
+    unixSeconds: Math.floor(now.getTime() / 1000),
+    unixMilliseconds: now.getTime(),
     timeAsString24: `${pad(hr24)}:${pad(min)}:${pad(sec)}`,
     timeAsString12: `${pad(hr12)}:${pad(min)}:${pad(sec)} ${period}`,
   };
