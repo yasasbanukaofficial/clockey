@@ -1,6 +1,5 @@
 export function createTimer() {
   let startTime: number | null = null;
-
   return {
     start: () => {
       startTime = performance.now();
@@ -17,6 +16,19 @@ export function createTimer() {
         elapsedMin: elapsed / 60000,
         elapsedHrs: elapsed / 3600000,
         text: `${elapsed.toFixed(2)} ms`,
+      };
+    },
+    lap: () => {
+      if (startTime === null) {
+        return null;
+      }
+      const duration = performance.now() - startTime;
+      return {
+        durationMs: duration,
+        durationSec: duration / 1000,
+        durationMin: duration / 60000,
+        durationHrs: duration / 3600000,
+        text: `${duration.toFixed(2)} ms`,
       };
     },
   };
