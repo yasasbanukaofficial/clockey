@@ -44,7 +44,7 @@ export function getCurrentHr() {
   return currentHour();
 }
 
-export function getCurrenHrResponse() {
+export function getCurrentHrResponse() {
   const hour = currentHour();
   const response = {
     success: true,
