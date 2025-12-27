@@ -1,6 +1,6 @@
 {
   "name": "clockey",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "API-first time utilities for backend developers",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
