@@ -1,4 +1,32 @@
 export function isBefore(timestamp: Date | number | string) {
+  if (timestamp instanceof Date) {
+    if (isNaN(timestamp.getTime())) {
+      return {
+        error:
+          "invalid timestamp (date), please read documentation for more info",
+      };
+    }
+  } else if (typeof timestamp === "string") {
+    const tsDate = new Date(timestamp);
+    if (isNaN(tsDate.getTime())) {
+      return {
+        error:
+          "invalid timestamp (string), please read documentation for more info",
+      };
+    }
+  } else if (typeof timestamp === "number") {
+    if (isNaN(timestamp)) {
+      return {
+        error:
+          "invalid timestamp (number), please read documentation for more info",
+      };
+    }
+  } else {
+    return {
+      error: "invalid timestamp, please read documentation for more info",
+    };
+  }
+
   const date = new Date();
   let isBefore: boolean;
   let duration: number;
@@ -24,6 +52,34 @@ export function isBefore(timestamp: Date | number | string) {
 }
 
 export function isAfter(timestamp: Date | number | string) {
+  if (timestamp instanceof Date) {
+    if (isNaN(timestamp.getTime())) {
+      return {
+        error:
+          "invalid timestamp (date), please read documentation for more info",
+      };
+    }
+  } else if (typeof timestamp === "string") {
+    const tsDate = new Date(timestamp);
+    if (isNaN(tsDate.getTime())) {
+      return {
+        error:
+          "invalid timestamp (string), please read documentation for more info",
+      };
+    }
+  } else if (typeof timestamp === "number") {
+    if (isNaN(timestamp)) {
+      return {
+        error:
+          "invalid timestamp (number), please read documentation for more info",
+      };
+    }
+  } else {
+    return {
+      error: "invalid timestamp, please read documentation for more info",
+    };
+  }
+
   const date = new Date();
   let isAfter: boolean;
   let duration: number;

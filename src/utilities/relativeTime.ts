@@ -4,7 +4,7 @@ export function relativeTime(timestamp: Date | number | string) {
   if (timestamp === null || timestamp === undefined) {
     return {
       error:
-        "Timestamp is null or undefined, please read documentation for more info",
+        "timestamp is either null or undefined, please read documentation for more info",
     };
   }
   const timestampDate =
@@ -16,11 +16,19 @@ export function relativeTime(timestamp: Date | number | string) {
     };
   }
   let humanTxt: string;
-  const durationType = isAfter(timestamp).isAfter
-    ? isAfter(timestamp)
-    : isBefore(timestamp);
+  const afterResult = isAfter(timestamp);
 
-  if (isAfter(timestamp).isAfter) {
+  if ("error" in afterResult) {
+    return afterResult;
+  }
+
+  const durationType = afterResult.isAfter ? afterResult : isBefore(timestamp);
+
+  if ("error" in durationType) {
+    return durationType;
+  }
+
+  if (afterResult.isAfter) {
     if (durationType.durationInSeconds < 60) {
       humanTxt = `${Math.round(durationType.durationInSeconds)} second(s) ago`;
     } else if (durationType.durationInMinutes < 60) {
@@ -46,6 +54,6 @@ export function relativeTime(timestamp: Date | number | string) {
     timestamp: Date.parse(timestampDate.toString()),
     timestampDate,
     humanReadable: humanTxt,
-    isInFuture: isAfter(timestamp).isAfter,
+    isInFuture: afterResult.isAfter,
   };
 }
