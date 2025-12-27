@@ -34,7 +34,22 @@ ESM / TypeScript:
 
 ```ts
 import { getCurrentTimeResponse } from "clockey/response/timeResponse";
+import { createTimer, isBefore, relativeTime } from "clockey";
+
 console.log(getCurrentTimeResponse());
+
+// Timer example
+const timer = createTimer();
+timer.start();
+// ... some code ...
+console.log(timer.end());
+
+// Diff checker example
+const pastDate = new Date("2025-12-25");
+console.log(isBefore(pastDate)); // Check if date is before now
+
+// Relative time example
+console.log(relativeTime("2025-12-25")); // Human-readable relative time
 ```
 
 Express example (route):
@@ -53,6 +68,30 @@ app.listen(3000);
 ## 📚 Methods (Quick usage)
 
 Below are grouped, easy-to-read tables for the package exports. Each table shows usage and what the function returns.
+
+### ⏲️ Utility Helpers
+
+#### Timer
+
+| Name            | Example Usage                  | Output Format                                                           | Example Data                                                                                            |
+| --------------- | ------------------------------ | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `createTimer()` | `const timer = createTimer();` | `{ start, end, lap }`                                                   | Returns object with `start()`, `end()`, and `lap()` methods for performance timing                      |
+| `timer.start()` | `timer.start();`               | `void`                                                                  | Starts the timer                                                                                        |
+| `timer.end()`   | `const result = timer.end();`  | `{ elapsedMs, elapsedSec, elapsedMin, elapsedHrs, text }` \| `null`     | `{ elapsedMs: 1234.5, elapsedSec: 1.23, elapsedMin: 0.02, elapsedHrs: 0.0003, text: '1234.50 ms' }`     |
+| `timer.lap()`   | `const result = timer.lap();`  | `{ durationMs, durationSec, durationMin, durationHrs, text }` \| `null` | `{ durationMs: 1234.5, durationSec: 1.23, durationMin: 0.02, durationHrs: 0.0003, text: '1234.50 ms' }` |
+
+#### Diff Checker
+
+| Name         | Example Usage                         | Output Format                                                                                                      | Example Data                                                                                                                             |
+| ------------ | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `isBefore()` | `const result = isBefore(timestamp);` | `{ isBefore, durationInMs, durationInSeconds, durationInMinutes, durationInHours, durationInDays }` \| `{ error }` | `{ isBefore: true, durationInMs: 5000, durationInSeconds: 5, durationInMinutes: 0.08, durationInHours: 0.001, durationInDays: 0.00006 }` |
+| `isAfter()`  | `const result = isAfter(timestamp);`  | `{ isAfter, durationInMs, durationInSeconds, durationInMinutes, durationInHours, durationInDays }` \| `{ error }`  | `{ isAfter: false, durationInMs: 5000, durationInSeconds: 5, durationInMinutes: 0.08, durationInHours: 0.001, durationInDays: 0.00006 }` |
+
+#### Relative Time
+
+| Name             | Example Usage                             | Output Format                                                            | Example Data                                                                                         |
+| ---------------- | ----------------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| `relativeTime()` | `const result = relativeTime(timestamp);` | `{ timestamp, timestampDate, humanReadable, isInFuture }` \| `{ error }` | `{ timestamp: 1735334400000, timestampDate: Date, humanReadable: '2 hours ago', isInFuture: false }` |
 
 ### ⏱️ Time helpers
 
@@ -141,6 +180,55 @@ String only helper responses use `value`:
   "msg": "Current hour string fetched",
   "value": "09"
 }
+```
+
+## ❌ Error Handling
+
+Utility functions like `isBefore()`, `isAfter()`, and `relativeTime()` return error objects when invalid inputs are provided:
+
+**Error Response Format:**
+
+```json
+{
+  "error": "invalid timestamp, please read documentation for more info"
+}
+```
+
+**Common Error Cases:**
+
+| Error Type          | Example                                   | How to Fix                                                         |
+| ------------------- | ----------------------------------------- | ------------------------------------------------------------------ |
+| Invalid Date String | `isBefore('not-a-date')`                  | Use valid ISO 8601 format: `isBefore('2025-12-25')`                |
+| Invalid Date Object | `isBefore(new Date('invalid'))`           | Create valid Date: `isBefore(new Date())`                          |
+| NaN Number          | `isBefore(NaN)`                           | Pass valid timestamp number: `isBefore(1735334400000)`             |
+| Null/Undefined      | `isBefore(null)` or `isBefore(undefined)` | Ensure value is provided: `isBefore(timestamp)`                    |
+| Invalid Type        | `isBefore({})`                            | Use Date, number (milliseconds), or string: `isBefore(new Date())` |
+
+**Example Error Handling:**
+
+```ts
+import { isBefore, relativeTime } from "clockey";
+
+const result = isBefore("2025-12-25");
+
+// Check for error
+if ("error" in result) {
+  console.error("Error:", result.error);
+  // Handle the error appropriately
+} else {
+  console.log("Duration:", result.durationInSeconds, "seconds");
+}
+```
+
+**Accepted Timestamp Formats:**
+
+```ts
+// All of these are valid:
+isBefore(new Date("2025-12-25")); // Date object
+isBefore("2025-12-25"); // ISO 8601 string
+isBefore("2025-12-25T10:30:00Z"); // ISO 8601 with time
+isBefore(1735334400000); // Unix timestamp in milliseconds
+isBefore(1735334400); // Unix timestamp in seconds (converted to ms)
 ```
 
 ## 🌐 Links & socials
